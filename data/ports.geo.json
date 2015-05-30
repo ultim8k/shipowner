@@ -1,0 +1,162 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Piraeus",
+        "from": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.642578125,
+          37.936074619194514
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Aigina"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.42731475830078,
+          37.74520008134973
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rafina"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.006500244140625,
+          38.019967758742766
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mykonos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.331039428710938,
+          37.446516047833484
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chios"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.136474609375,
+          38.36750215395045
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Santorini"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.429916381835938,
+          36.41299412160808
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Heraklion"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.147705078125,
+          35.34425514918409
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chania"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.005126953125,
+          35.505400093441324
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rhodes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.201904296875,
+          36.41244153535644
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.301025390625,
+          36.88840804313823
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lesvos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.54296875,
+          39.11301365149975
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Poros"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.454952239990234,
+          37.50448309897232
+        ]
+      }
+    }
+  ]
+}
