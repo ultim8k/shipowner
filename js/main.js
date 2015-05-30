@@ -19,26 +19,44 @@ var prepareMap = function(){
     L.control.zoom({
         position: 'topright'
     }).addTo(map);
-
+    
+    // asxhmooooo
+    function setUpRoutes(routes){
+        var lines = routesLayer.getLayers();
+        lines.forEach(function(line){
+            var polyline = L.polyline(line._latlngs);
+            var latlngs = polyline.getLatLngs();
+            var arr = [];
+            latlngs.forEach(function(count){
+                arr.push(2000);
+            });
+            L.Marker.movingMarker(polyline.getLatLngs(),arr, {
+              icon: shipIcon,
+              // distance: 30000,  // meters
+              // interval: 2000,
+              autostart:true // milliseconds 
+            }).addTo(shipsLayer);
+        });
+    }
     // Icons
 
-var shipIcon = L.icon({
-    iconUrl: 'img/ship.png',
-    iconSize: [48, 48],
-    iconAnchor: [22, 48],
-    popupAnchor: [-3, -76]
+    var shipIcon = L.icon({
+        iconUrl: 'img/ship.png',
+        iconSize: [48, 48],
+        iconAnchor: [22, 48],
+        popupAnchor: [-3, -76]
+    });
+        // setup Layers
+    var portsLayer = L.geoJson(data.ports),
+        routesLayer = L.geoJson(data.routes),
+        shipsLayer = L.layerGroup();
+
+        // add Layers to map
+        portsLayer.addTo(map);
+        setUpRoutes(routesLayer);
+        shipsLayer.addTo(map);
+
 };
-    // setup Layers
-var portsLayer = L.geoJson(data.ports),
-    routesLayer = L.geoJson(data.routes),
-    shipsLayer = L.layerGroup();
-
-    // add Layers to map
-    portsLayer.addTo(map);
-    setUpRoutes(routesLayer);
-    shipsLayer.addTo(map);
-
-});
 
 var actionsEvents = function() {
     $('.js_ships_on_route').click(function () {
@@ -61,24 +79,7 @@ $(document).ready(function () {
 
 
 
-function setUpRoutes(routes){
-    var lines = routesLayer.getLayers();
-    lines.forEach(function(line){
-        var polyline = L.polyline(line._latlngs);
-        var latlngs = polyline.getLatLngs();
-        var arr = [];
-        latlngs.forEach(function(count){
-            arr.push(2000);
-        });
-        L.Marker.movingMarker(polyline.getLatLngs(),arr, {
-          icon: shipIcon,
-          // distance: 30000,  // meters
-          // interval: 2000,
-          autostart:true // milliseconds 
-        }).addTo(shipsLayer);
-    });
 
-}
 // ==========================================================
 // ========================== DATA ==========================
 // ==========================================================
