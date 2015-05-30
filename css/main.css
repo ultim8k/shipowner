@@ -130,8 +130,14 @@ body:before {
     box-shadow: inset 0 0 10px #000;
 }
 .sea-map { height: 100%; }
+.game-header {
+    max-width: 900px;
+    padding: 20px;
+    margin: 0 auto;
+    height: 100px;
+}
 .game-footer {
-    height: 150px;
+    height: 100px;
     background-color: #5040aa;
     box-shadow: inset 0 10px 10px -5px rgba(0,0,0,0.5);
 }
@@ -275,23 +281,35 @@ body:before {
     border: 3px solid #59260b;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    padding: 20px;
 }
 .game-modal__close {
-    width: 20px;
-    height: 20px;
+    width: 21px;
+    height: 21px;
     position: absolute;
     right: -10px;
     top: -10px;
     background-color: #954535;
     border: 3px solid #59260b;
     border-radius: 50%;
-    line-height: 13px;
+    line-height: 14px;
     text-align: center;
     cursor: pointer;
 }
 
+.timed-loader-wrap {
 
-
+}
+.timed-loader {
+    border: 1px solid #515151;
+}
+.timed-loader__percentage {
+    background-color: red;
+    border: 1px solid #aa2222;
+    width: 0;
+    height: 10px;
+    transition: width 0.2s;
+}
 
 
 
