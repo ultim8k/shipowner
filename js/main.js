@@ -130,9 +130,9 @@ var updateLoaderBasedOnTime = function(timeElapsed, totalTimeNeeded) {
 
 var promptToBuyShip = function() {
     var markup = '<div class="js_ship_for_sale">';
-    var shipList = Ship.protype.types;
+    var shipList = Ship.prototype.types;
     shipList.forEach(function (shipType) {
-        markup += '<ul><li>Ship type:' + shipType.typeOf + '</li>'+
+        markup += '<ul class="ship-for-sale__details"><li>Ship type:' + shipType.typeOf + '</li>'+
         '<li>GT:' + shipType.gt +'</li>'+
         '<li>DWT:' + shipType.dwt +'</li>'+
         '<li>LOA:' + shipType.loa +'</li>'+
@@ -140,10 +140,23 @@ var promptToBuyShip = function() {
         '<li>Fuel consumption:' + shipType.fuel.consumption +'</li>'+
         '<li>COST:' + shipType.purchaseCost +'</li>'+
         '</ul>';
-        markup += '<div><span class="buy-ship js_buy_ship">Buy</span></div></div>';
+        markup += '<div><span class="buy-ship js_buy_ship" data-ship-type="'+ shipType.typeOf +'">Buy</span></div></div>';
     });
 
     updateModalMarkup(markup);
+
+    $('.js_buy_ship').off();
+    $('.js_buy_ship').on('click', function () {
+        var $buy = $(this);
+        var shipType = $buy.data('ship-type');
+        var shipObj = _.where(Ship.prototype.types, {typeOf: shipType});
+        game.player.buyShip(shipObj[0]);
+        $buy.text('Ship bought!');
+        setTimeout(function () {
+            $buy.text('Buy');
+        }, 300);
+    });
+
     openGameModal();
 };
 
@@ -260,7 +273,7 @@ function Game (player) {
 
 Game.prototype.init = function init () {
 
-    
+
     this.ticks = 0;
     // Game loop
 
@@ -271,7 +284,8 @@ Game.prototype.init = function init () {
 Game.prototype.tick = function tick () {
     // check ships outside of port
     this.player.fleetChargeMoney();
-
+    var cash = this.player.cash;
+    $('.js_user_cash').text(cash);
 }
 
 function Ship (data) {
