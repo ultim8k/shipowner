@@ -126,7 +126,7 @@ body:before {
 .game-wrapper {
     height: 100%;
     position: relative;
-    border: 1px solid #a1a1a1;
+    border-top: 3px solid #59260b;
     /*box-shadow: inset 0 0 10px #000;*/
 }
 .sea-map { height: 100%; }
@@ -138,6 +138,19 @@ body:before {
     height: 20px;
     z-index: 120;
     color: #fff;
+}
+.stats {
+    font-size: 12px;
+}
+.stats__divider {
+    color: #59260b;
+}
+.stats__level {
+    margin: 0 5px;
+}
+.stats__gold {
+    margin: 0 5px;
+    color: gold;
 }
 .fleet-panel {
     width: 150px;
@@ -225,9 +238,6 @@ body:before {
     left: 0;
     top: 100px;
     text-align: center;
-    /*border: 0 solid #59260b;
-    border-bottom-width: 5px;
-    border-right-width: 5px;*/
 }
 .action {
     padding: 5px;
@@ -249,22 +259,33 @@ body:before {
     position: relative;
     bottom: 3px;
 }
+.action__image {
+    position: relative;
+    z-index: 200;
+}
 .action__label {
     width: 0;
     display: block;
     overflow: hidden;
-    background-color: #aaa;
+    background-color: #954535;
+    color: gold;
     position: absolute;
     top: 50%;
     left: 100%;
-    margin-top: -12px;
-    margin-left: 20px;
-    height: 26px;
-    line-height: 26px;
-    border-radius: 2px;
+    margin-top: -18px;
+    margin-left: 11px;
+    height: 36px;
+    line-height: 36px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
     padding: 0;
+    z-index: -1;
+    /*margin-left: -900px;*/
+    margin-left: 11px;
+    opacity: 0;
+    transition: width 0.2s, margin-left 0.5s, z-index 0.5s, opacity 0.8s;
 }
-.action__label:before {
+/*.action__label:before {
     display: block;
     content: '';
     position: absolute;
@@ -274,13 +295,15 @@ body:before {
     width: 14px;
     height: 14px;
     background-color: #aaa;
-    /*background-color: inherit;*/
     transform: rotate(45deg);
-}
+}*/
 .action:hover .action__label {
     width: 150px;
     padding: 0 10px;
     overflow: visible;
+
+    z-index: 100;
+    opacity: 1;
 }
 
 .game-modal {
