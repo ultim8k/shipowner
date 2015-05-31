@@ -193,29 +193,25 @@ function Player (data) {
 
 }
 
-function Game () {
+Player.prototype.buyShip = function buyShip (data) {
+    var ship = new Ship({
+        name: data.name,
+    })
+    this.cash -= ship.cost;
+    this.addToFleet(ship);
+}
 
+function Game (player) {
+    this.player = player;
 }
 
 Game.prototype.init = function init () {
 
-    var playerData = (function(){
-        var name = $('.js_player_name').text(),
-            companyName = $('.js_company_name').text(),
-            ageGroup = $('.js_age_group').val(),
-            obj = {
-                name: name,
-                companyName: companyName,
-                ageGroup: ageGroup
-            };
-        return obj;
-    })();
-
-    this.player = new Player(playerData);
+    
     this.ticks = 0;
     // Game loop
 
-    this._intervalId = setInterval(this.tick, 1000 / 50);
+    this._intervalId = setInterval(this.tick, 5000);
 
 }
 
@@ -250,7 +246,6 @@ function Ship (data) {
          fuelCost = this.fuel.consumption * Game.getCommodityPrice('fuel');
         }
         if (this.broken) {serviceCost = 0}
-
     }
 
 
@@ -262,6 +257,47 @@ Ship.prototype.acceptOffer = function acceptOffer (offer) {
 
 }
 
+Ship.prototype.types = {
+    handymax: {
+        typeOf: 'Handymax',
+        crew: 10,
+        purchaseCost: 35000000,
+        fuel: {
+            consumption: 30,
+            remaining: 0,
+            capacity: 400
+        },
+        gt: 35000,
+        dwt: 40000,
+        loa: 170
+    },
+    panamax: {
+        typeOf: 'Panamax',
+        crew: 12,
+        purchaseCost: 4400000,
+        fuel: {
+            consumption: 32,
+            remaining: 0,
+            capacity: 450
+        },
+        gt: 43000,
+        dwt: 65000,
+        loa: 210
+    },
+    capesize: {
+        typeOf: 'Capesize',
+        crew: 16,
+        purchaseCost: 55000000,
+        fuel: {
+            consumption: 35,
+            remaining: 0,
+            capacity: 500
+        },
+        gt: 68000,
+        dwt: 95000,
+        loa: 292
+    }
+}
 Ship.prototype.startRoute = function startRoute (route) {
     this.isAvailable = false;
      // Fuel consumption
