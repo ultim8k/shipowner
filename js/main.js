@@ -176,12 +176,19 @@ function Player (data) {
         this.fleet.push(ship);
     };
 
-    this.availableFleet = function(){
-        var count = 0;
+    this.availableFleet = function(type){
+        var totalCount = 0;
+        var availableCount = 0;
         this.fleet.forEach(function(ship){
-            if (ship.isAvailable()) count ++
+            if (ship.typeOf === type) count ++
+            if (ship.isAvailable) availablecount ++
         });
-        return count;
+
+        return {
+            shipType: type,
+            shipCount: totalcount,
+            availableCount: availableCount
+        }
     }
 
 }
@@ -193,9 +200,9 @@ function Game () {
 Game.prototype.init = function init () {
 
     var playerData = (function(){
-        var name = $('#playerName').text(),
-            companyName = $('#companyName').text(),
-            ageGroup = $('#ageGroup').val(),
+        var name = $('.js_player_name').text(),
+            companyName = $('.js_company_name').text(),
+            ageGroup = $('.js_age_group').val(),
             obj = {
                 name: name,
                 companyName: companyName,
@@ -265,13 +272,19 @@ function Commodity (data) {
     this.price = data.price;
 }
 
-function Event (data) {
-
+function gameEvent (data) {
+    this.title = data.title;
+    this.description = data.description;
+    this.effect = data.effect;
+    this.fire = function(){
+        this.effect.call(this.effect);
+    }
 }
 
 function Decision (data) {
 
 }
+
 
 
 
