@@ -32,10 +32,19 @@ var prepareMap = function(){
             var polyline = L.polyline(line._latlngs);
             var latlngs = polyline.getLatLngs();
             var arr = [];
-            latlngs.forEach(function(count){
-                arr.push(2000);
-            });
-            L.Marker.movingMarker(polyline.getLatLngs(),arr, {
+            for (var i = 0; i<latlngs.length-1; i++) {
+                var distance = latlngs[i].distanceTo(latlngs[i+1])
+
+                arr.push(Math.floor(distance / 10));
+
+            }
+            line.fullDistance = arr.reduce(function(prev,cur){
+                return prev + cur;
+            }) / 100;
+            console.log(line.fullDistance);
+            
+            
+            L.Marker.movingMarker(latlngs,arr, {
               icon: shipIcon,
               // distance: 30000,  // meters
               // interval: 2000,
@@ -51,8 +60,17 @@ var prepareMap = function(){
         iconAnchor: [22, 48],
         popupAnchor: [-3, -76]
     });
+    var portIcon = L.icon({
+        iconUrl: 'img/anchor.png',
+        iconSize: [32,32]
+    });
         // setup Layers
-    var portsLayer = L.geoJson(data.ports),
+    var portsLayer = L.geoJson(data.ports,{
+            onEachFeature: function(feature,layer){
+                layer.setIcon(portIcon);
+                layer.bindPopup('<h5>'+feature.properties.name+'</h5>');
+            }
+        }),
         routesLayer = L.geoJson(data.routes),
         shipsLayer = L.layerGroup();
 
@@ -141,6 +159,14 @@ function Player (data) {
         this.fleet.push(ship);
     };
 
+    this.availableFleet = function(){
+        var count = 0;
+        this.fleet.forEach(function(ship){
+            if (ship.isAvailable()) count ++
+        });
+        return count;
+    }
+
 }
 
 function Game () {
@@ -177,10 +203,7 @@ Game.prototype.tick = function tick () {
 
 function Ship (data) {
     this.name = data.name;
-    this.timer = function(time,cb) {
-        setTimeout()
-
-    }
+    
 
     this.gt = data.gt;
     this.dwt = data.dwt;
@@ -192,7 +215,7 @@ function Ship (data) {
         capacity : data.fuel.capacity
     };
     this.broken = false;
-    this.typeOf = data.class;
+    this.typeOf = data.typeOf;
     this.crew = data.crew;
     this.maintenanceCost = function(){
         var fuelCost = 0;
@@ -205,7 +228,19 @@ function Ship (data) {
         if (this.broken) {serviceCost = 0}
 
     }
+    
 
+}
+
+Ship.prototype.acceptOffer = function acceptOffer (offer) {
+    
+    this.startRoute(offer.route);
+
+}
+
+Ship.prototype.startRoute = function startRoute (route) {
+    this.isAvailable = false;
+     // Fuel consumption
 }
 
 function Commodity (data) {
