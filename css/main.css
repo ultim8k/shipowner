@@ -360,7 +360,7 @@ body:before {
     left: 0;
     background-color: rgba(0,0,0,0.8);
     padding: 100px 0;
-    z-index: 500;
+    z-index: 1500;
 }
 .game-splash__form-wrap {
     background-color: brown;
@@ -397,6 +397,11 @@ body:before {
 }
 .game-splash__submit:active {
     box-shadow: 0 0 0 rgba(0,0,0,0.5);
+}
+.user__firstname {
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
 }
 
 

@@ -142,6 +142,9 @@ var loginPlayer = function () {
         companyName: companyName,
         ageGroup: ageGroup
     });
+    window.game = new Game(player);
+    $('.js_player_name').text(playerName);
+    $('.js_company_name').text(companyName);
     $('.js_initial_screen').addClass('hidden');
 };
 
