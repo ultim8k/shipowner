@@ -128,6 +128,25 @@ var updateLoaderBasedOnTime = function(timeElapsed, totalTimeNeeded) {
     return false;
 };
 
+var promptToBuyShip = function() {
+    var markup = '<div class="js_ship_for_sale">';
+    var shipList = Ship.protype.types;
+    shipList.forEach(function (shipType) {
+        markup += '<ul><li>Ship type:' + shipType.typeOf + '</li>'+
+        '<li>GT:' + shipType.gt +'</li>'+
+        '<li>DWT:' + shipType.dwt +'</li>'+
+        '<li>LOA:' + shipType.loa +'</li>'+
+        '<li>Fuel capacity:' + shipType.fuel.capacity +'</li>'+
+        '<li>Fuel consumption:' + shipType.fuel.consumption +'</li>'+
+        '<li>COST:' + shipType.purchaseCost +'</li>'+
+        '</ul>';
+        markup += '<div><span class="buy-ship js_buy_ship">Buy</span></div></div>';
+    });
+
+    updateModalMarkup(markup);
+    openGameModal();
+};
+
 var loginPlayer = function () {
     var $playerNameField = $('.js_firstname_input');
     var $companyNameField = $('.js_companyname_input');
@@ -140,12 +159,13 @@ var loginPlayer = function () {
     var player = new Player({
         name: playerName,
         companyName: companyName,
-        ageGroup: ageGroup
+        ageGroup: playerAge
     });
     window.game = new Game(player);
     $('.js_player_name').text(playerName);
     $('.js_company_name').text(companyName);
     $('.js_initial_screen').addClass('hidden');
+    promptToBuyShip();
 };
 
 var actionsEvents = function() {
