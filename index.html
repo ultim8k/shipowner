@@ -21,33 +21,53 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div class="game-header">
-            <img src="img/boat33.png" alt="">
-        </div>
         <div class="game-wrapper">
+            <div class="game-header game-ui-panel">
+                <div class="stats">
+                    <span class="stats__level">Level <span class"js_user_level_no">1</span></span>
+                    <span class="stats__gold">Gold <span class"js_user_gold"></span></span>
+                </div>
+            </div>
             <div id="sea-map", class="js_sea_map sea-map"></div>
-            <div class="game-sidebar">
-                <div class="avatar-wrap">
-                    <div class="user-avatar">
-                        <img class="user-avatar__image" src="img/captain_avatar.jpeg" alt="">
-                    </div>
-                    <span class="user-level">1</span>
+            <div class="avatar-wrap game-ui-panel">
+                <div class="user-avatar">
+                    <img class="user-avatar__image" src="img/captain_avatar.jpeg" alt="">
                 </div>
-                <div class="actions-wrap">
-                    <div class="action action--on-route js_ships_on_route">
-                        <img src="img/boat17.png" alt="">
-                        <span class="action__label">Ships on route</span>
-                    </div>
-                    <div class="action action--on-harbour js_ships_available">
-                        <img src="img/containers.png" alt="">
-                        <span class="action__label">Ships available</span>
-                    </div>
-                    <div class="action action--clients js_clients">
-                        <img src="img/container5.png" alt="">
-                        <span class="action__label">Brokers</span>
-                    </div>
+                <!-- <span class="user-level">1</span> -->
+            </div>
+            <div class="actions-wrap game-ui-panel">
+            <div class="action action--notifications js_notifications">
+                    <img src="img/notifications.png" alt="">
+                    <span class="action__label">Notifications</span>
+                </div>
+                <div class="action action--on-route js_ships_on_route">
+                    <img src="img/boat17.png" alt="">
+                    <span class="action__label">Ships on route</span>
+                </div>
+                <div class="action action--on-harbour js_ships_available">
+                    <img src="img/containers.png" alt="">
+                    <span class="action__label">Ships available</span>
+                </div>
+                <div class="action action--clients js_clients">
+                    <img src="img/container5.png" alt="">
+                    <span class="action__label">Brokers</span>
+                </div>
 
-                </div>
+            </div>
+            <div class="fleet-panel game-ui-panel js_fleet_panel">
+                <div class="fleet-item">0</div>
+                <div class="fleet-item">1</div>
+                <div class="fleet-item">2</div>
+                <div class="fleet-item">3</div>
+                <div class="fleet-item">4</div>
+                <div class="fleet-item">5</div>
+                <div class="fleet-item">6</div>
+                <div class="fleet-item">7</div>
+                <div class="fleet-item">8</div>
+                <div class="fleet-item">9</div>
+            </div>
+            <div class="activity-stack js_activity_stack">
+                <div class="activity-item">1</div>
             </div>
             <div class="game-footer">
 
