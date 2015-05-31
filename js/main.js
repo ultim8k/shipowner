@@ -32,10 +32,19 @@ var prepareMap = function(){
             var polyline = L.polyline(line._latlngs);
             var latlngs = polyline.getLatLngs();
             var arr = [];
-            latlngs.forEach(function(count){
-                arr.push(2000);
-            });
-            L.Marker.movingMarker(polyline.getLatLngs(),arr, {
+            for (var i = 0; i<latlngs.length-1; i++) {
+                var distance = latlngs[i].distanceTo(latlngs[i+1])
+
+                arr.push(Math.floor(distance / 10));
+
+            }
+            line.fullDistance = arr.reduce(function(prev,cur){
+                return prev + cur;
+            }) / 100;
+            console.log(line.fullDistance);
+            
+            
+            L.Marker.movingMarker(latlngs,arr, {
               icon: shipIcon,
               // distance: 30000,  // meters
               // interval: 2000,
@@ -51,8 +60,17 @@ var prepareMap = function(){
         iconAnchor: [22, 48],
         popupAnchor: [-3, -76]
     });
+    var portIcon = L.icon({
+        iconUrl: 'img/anchor.png',
+        iconSize: [32,32]
+    });
         // setup Layers
-    var portsLayer = L.geoJson(data.ports),
+    var portsLayer = L.geoJson(data.ports,{
+            onEachFeature: function(feature,layer){
+                layer.setIcon(portIcon);
+                layer.bindPopup('<h5>'+feature.properties.name+'</h5>');
+            }
+        }),
         routesLayer = L.geoJson(data.routes),
         shipsLayer = L.layerGroup();
 
@@ -136,6 +154,118 @@ $(document).ready(function () {
 
 
 
+// Models
+
+function Player (data) {
+    this.name = data.name;
+    this.companyName = data.companyName;
+    this.cash = 100000000;
+    this.ageGroup = data.ageGroup;
+    this.fleet = [];
+    this.level = 1;
+
+    //methods
+
+    this.addToFleet = function(ship){
+        this.fleet.push(ship);
+    };
+
+    this.availableFleet = function(){
+        var count = 0;
+        this.fleet.forEach(function(ship){
+            if (ship.isAvailable()) count ++
+        });
+        return count;
+    }
+
+}
+
+function Game () {
+
+}
+
+Game.prototype.init = function init () {
+
+    var playerData = (function(){
+        var name = $('#playerName').text(),
+            companyName = $('#companyName').text(),
+            ageGroup = $('#ageGroup').val(),
+            obj = {
+                name: name,
+                companyName: companyName,
+                ageGroup: ageGroup
+            };
+        return obj;
+    })();
+
+    this.player = new Player(playerData);
+    this.ticks = 0;
+    // Game loop
+
+    this._intervalId = setInterval(this.tick, 1000 / 50);
+
+}
+
+Game.prototype.tick = function tick () {
+    this.ticks ++
+    console.log('tick' + this.ticks);
+
+}
+
+function Ship (data) {
+    this.name = data.name;
+    
+
+    this.gt = data.gt;
+    this.dwt = data.dwt;
+    this.loa = data.loa;
+    this.purchaseCost = data.purchaseCost;
+    this.fuel = {
+        consumption: data.fuel.consumption,
+        remaining : data.fuel.consumption,
+        capacity : data.fuel.capacity
+    };
+    this.broken = false;
+    this.typeOf = data.typeOf;
+    this.crew = data.crew;
+    this.maintenanceCost = function(){
+        var fuelCost = 0;
+        var crewCost = this.crew * 45; // euros per day
+        var serviceCost = 0;
+
+        if (this.remaining > this.fuel.consumption) {
+         fuelCost = this.fuel.consumption * Game.getCommodityPrice('fuel');
+        }
+        if (this.broken) {serviceCost = 0}
+
+    }
+    
+
+}
+
+Ship.prototype.acceptOffer = function acceptOffer (offer) {
+    
+    this.startRoute(offer.route);
+
+}
+
+Ship.prototype.startRoute = function startRoute (route) {
+    this.isAvailable = false;
+     // Fuel consumption
+}
+
+function Commodity (data) {
+    this.name = data.name;
+    this.price = data.price;
+}
+
+function Event (data) {
+
+}
+
+function Decision (data) {
+
+}
 
 
 
