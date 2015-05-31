@@ -209,9 +209,19 @@ function Player (data) {
 
         return {
             shipType: type,
-            shipCount: totalcount,
+            shipCount: totalCount,
             availableCount: availableCount
         }
+    };
+
+    this.fleetChargeMoney = function(){
+
+        var outsideFleet = this.fleet.filter(function(ship){
+            return ship.isAvailable === false;
+        });
+        outsideFleet.forEach(function(ship){
+            this.cash -= ship.maintenanceCost();
+        });
     }
 
 }
@@ -239,8 +249,8 @@ Game.prototype.init = function init () {
 }
 
 Game.prototype.tick = function tick () {
-    this.ticks ++
-    console.log('tick' + this.ticks);
+    // check ships outside of port
+    this.player.fleetChargeMoney();
 
 }
 
@@ -269,6 +279,8 @@ function Ship (data) {
          fuelCost = this.fuel.consumption * Game.getCommodityPrice('fuel');
         }
         if (this.broken) {serviceCost = 0}
+
+        return fuelCost + crewCost;
     }
 
 
@@ -280,8 +292,8 @@ Ship.prototype.acceptOffer = function acceptOffer (offer) {
 
 }
 
-Ship.prototype.types = {
-    handymax: {
+Ship.prototype.types = [
+    {
         typeOf: 'Handymax',
         crew: 10,
         purchaseCost: 35000000,
@@ -294,7 +306,7 @@ Ship.prototype.types = {
         dwt: 40000,
         loa: 170
     },
-    panamax: {
+    {
         typeOf: 'Panamax',
         crew: 12,
         purchaseCost: 4400000,
@@ -307,7 +319,7 @@ Ship.prototype.types = {
         dwt: 65000,
         loa: 210
     },
-    capesize: {
+    {
         typeOf: 'Capesize',
         crew: 16,
         purchaseCost: 55000000,
@@ -320,9 +332,10 @@ Ship.prototype.types = {
         dwt: 95000,
         loa: 292
     }
-}
+];
 Ship.prototype.startRoute = function startRoute (route) {
     this.isAvailable = false;
+
      // Fuel consumption
 }
 
