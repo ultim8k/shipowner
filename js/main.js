@@ -11,6 +11,12 @@ var updateModalMarkup = function(markup) {
     var $modal = $('.js_modal_body');
     $modal.html(markup);
 };
+var renderFleetItem = function(data) {
+    var markup = '';
+    markup = '<div class="js_fleet_item fleet-item"><img class="fleet-item__image" src="img/' + data.shipType + '"><span class="fleet-item__vessel-count js_vessel_count">'+ data.shipCount + '</span><span class="fleet-item__vessel-count fleet-item__vessel-count--available js_available_count">' + data.availableCount + '</span></div>';
+    return markup;
+};
+
 var prepareMap = function(){
     var map = L.map('sea-map', {
         zoomControl: false
@@ -42,8 +48,8 @@ var prepareMap = function(){
                 return prev + cur;
             }) / 100;
             console.log(line.fullDistance);
-            
-            
+
+
             L.Marker.movingMarker(latlngs,arr, {
               icon: shipIcon,
               // distance: 30000,  // meters
@@ -214,7 +220,7 @@ Game.prototype.tick = function tick () {
 
 function Ship (data) {
     this.name = data.name;
-    
+
 
     this.gt = data.gt;
     this.dwt = data.dwt;
@@ -239,12 +245,12 @@ function Ship (data) {
         if (this.broken) {serviceCost = 0}
 
     }
-    
+
 
 }
 
 Ship.prototype.acceptOffer = function acceptOffer (offer) {
-    
+
     this.startRoute(offer.route);
 
 }
