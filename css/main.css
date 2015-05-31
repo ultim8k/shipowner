@@ -368,6 +368,7 @@ body:before {
     padding: 20px;
     max-width: 400px;
     margin: 0 auto;
+    border: 2px solid white;
 }
 .game-splash__field { margin-bottom: 10px; }
 .game-splash__field__label {
@@ -404,6 +405,28 @@ body:before {
     font-size: 12px;
 }
 
+.game-modal__body {
+    overflow-y: scroll;
+    max-height: 100%;
+}
+
+.buy-ship {
+    display: inline-block;
+    background-color: gold;
+    padding: 5px 10px;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.5);
+    border-radius: 5px;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    text-align: center;
+}
+.buy-ship:active {
+    box-shadow: 0 0 0 rgba(0,0,0,0.5);
+}
+.ship-for-sale__details {
+    color: #fff;
+}
 
 /* ==========================================================================
    Helper classes
