@@ -132,7 +132,7 @@ var promptToBuyShip = function() {
     var markup = '<div class="js_ship_for_sale">';
     var shipList = Ship.prototype.types;
     shipList.forEach(function (shipType) {
-        markup += '<ul class="ship-for-sale__details"><li>Ship type:' + shipType.typeOf + '</li>'+
+        markup += '<img src="img/'+shipType.typeOf.toLowerCase()+'.jpg" width="300px">'+'<ul class="ship-for-sale__details"><li>Ship type:' + shipType.typeOf + '</li>'+
         '<li>GT:' + shipType.gt +'</li>'+
         '<li>DWT:' + shipType.dwt +'</li>'+
         '<li>LOA:' + shipType.loa +'</li>'+
@@ -276,13 +276,13 @@ Game.prototype.init = function init () {
     this.ticks = 0;
     // Game loop
 
-    this._intervalId = setInterval(this.tick, 5000);
+    this._intervalId = setInterval(this.tick(this), 5000);
 
 }
 
-Game.prototype.tick = function tick () {
+Game.prototype.tick = function tick (game) {
     // check ships outside of port
-    this.player.fleetChargeMoney();
+    game.player.fleetChargeMoney();
     var cash = this.player.cash;
     $('.js_user_cash').text(cash);
 }

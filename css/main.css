@@ -408,6 +408,7 @@ body:before {
 .game-modal__body {
     overflow-y: scroll;
     max-height: 100%;
+    color: white;
 }
 
 .buy-ship {
