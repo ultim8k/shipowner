@@ -227,9 +227,8 @@ function Player (data) {
 }
 
 Player.prototype.buyShip = function buyShip (data) {
-    var ship = new Ship({
-        name: data.name,
-    })
+    data.name = '';
+    var ship = new Ship(data);
     this.cash -= ship.cost;
     this.addToFleet(ship);
 }
@@ -333,6 +332,7 @@ Ship.prototype.types = [
         loa: 292
     }
 ];
+
 Ship.prototype.startRoute = function startRoute (route) {
     this.isAvailable = false;
 
