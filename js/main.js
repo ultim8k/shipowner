@@ -128,6 +128,23 @@ var updateLoaderBasedOnTime = function(timeElapsed, totalTimeNeeded) {
     return false;
 };
 
+var loginPlayer = function () {
+    var $playerNameField = $('.js_firstname_input');
+    var $companyNameField = $('.js_companyname_input');
+    var $playerAgeField = $('.js_age_input');
+    var playerName = $playerNameField.val();
+    var companyName = $companyNameField.val();
+    var playerAge = $playerAgeField.val();
+    var valid = $playerNameField && $playerNameField.length && $companyNameField && $companyNameField.length && $playerAgeField && $playerAgeField.length && playerName && playerAge && companyName;
+    if(!valid) { return false; }
+    var player = new Player({
+        name: playerName,
+        companyName: companyName,
+        ageGroup: ageGroup
+    });
+    $('.js_initial_screen').addClass('hidden');
+};
+
 var actionsEvents = function() {
     $('.js_ships_on_route').click(function () {
         openGameModal();
@@ -147,6 +164,9 @@ var actionsEvents = function() {
     $('.js_close_modal').click(function () {
         closeGameModal();
         updateModalMarkup('');
+    });
+    $('.js_player_login').click(function () {
+        loginPlayer();
     });
 };
 
