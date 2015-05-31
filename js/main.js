@@ -19,7 +19,7 @@ var prepareMap = function(){
     L.control.zoom({
         position: 'topright'
     }).addTo(map);
-    
+
     // asxhmooooo
     function setUpRoutes(routes){
         var lines = routesLayer.getLayers();
@@ -77,6 +77,101 @@ $(document).ready(function () {
 
 
 
+// Models
+
+function Player (data) {
+    this.name = data.name;
+    this.companyName = data.companyName;
+    this.cash = 100000000;
+    this.ageGroup = data.ageGroup;
+    this.fleet = [];
+    this.level = 1;
+
+    //methods
+
+    this.addToFleet = function(ship){
+        this.fleet.push(ship);
+    };
+
+}
+
+function Game () {
+
+}
+
+Game.prototype.init = function init () {
+
+    var playerData = (function(){
+        var name = $('#playerName').text(),
+            companyName = $('#companyName').text(),
+            ageGroup = $('#ageGroup').val(),
+            obj = {
+                name: name,
+                companyName: companyName,
+                ageGroup: ageGroup
+            };
+        return obj;
+    })();
+
+    this.player = new Player(playerData);
+    this.ticks = 0;
+    // Game loop
+
+    this._intervalId = setInterval(this.tick, 1000 / 50);
+
+}
+
+Game.prototype.tick = function tick () {
+    this.ticks ++
+    console.log('tick' + this.ticks);
+
+}
+
+function Ship (data) {
+    this.name = data.name;
+    this.timer = function(time,cb) {
+        setTimeout()
+
+    }
+
+    this.gt = data.gt;
+    this.dwt = data.dwt;
+    this.loa = data.loa;
+    this.purchaseCost = data.purchaseCost;
+    this.fuel = {
+        consumption: data.fuel.consumption,
+        remaining : data.fuel.consumption,
+        capacity : data.fuel.capacity
+    };
+    this.broken = false;
+    this.typeOf = data.class;
+    this.crew = data.crew;
+    this.maintenanceCost = function(){
+        var fuelCost = 0;
+        var crewCost = this.crew * 45; // euros per day
+        var serviceCost = 0;
+
+        if (this.remaining > this.fuel.consumption) {
+         fuelCost = this.fuel.consumption * Game.getCommodityPrice('fuel');
+        }
+        if (this.broken) {serviceCost = 0}
+
+    }
+
+}
+
+function Commodity (data) {
+    this.name = data.name;
+    this.price = data.price;
+}
+
+function Event (data) {
+
+}
+
+function Decision (data) {
+
+}
 
 
 
