@@ -22,7 +22,7 @@ var prepareMap = function(){
     }).addTo(map);
 
     L.control.zoom({
-        position: 'topright'
+        position: 'bottomleft'
     }).addTo(map);
 
     // asxhmooooo
@@ -72,7 +72,7 @@ var listAvailableShips = function() {
 
 var listBusyShips = function() {
     var markup = '';
-    markup = '<div class=""><p><img src="img/cargo13.png"/>You\'ve got 1 cargo ship busy.<br>It will be available in <span class="js_remaining_time">1 minute</span>.</p><div class="timed-loader"><div class="timed-loader__percentage js_percentage"></div></div></div>';
+    markup = '<div class=""><p><img src="img/cargo13.png"/>You\'ve got 1 cargo ship on the go from Piraeus to Heraklion.<br>It will be available in <span class="js_remaining_time">1 minute</span>.</p><div class="timed-loader"><div class="timed-loader__percentage js_percentage"></div></div></div>';
     updateModalMarkup(markup);
     updateLoaderBasedOnTime('', '2015-05-30T19:43:35.618Z');
     return false;
@@ -80,6 +80,13 @@ var listBusyShips = function() {
 
 var listAvailableClients = function() {
     // hey
+    return false;
+};
+
+listNotifications = function() {
+    var markup = '';
+    markup = '<div class=""><p>You have no new notifications</p></div>';
+    updateModalMarkup(markup);
     return false;
 };
 
@@ -108,6 +115,10 @@ var actionsEvents = function() {
     });
     $('.js_clients').click(function () {
         openGameModal();
+    });
+    $('.js_notifications').click(function () {
+        openGameModal();
+        listNotifications();
     });
     $('.js_close_modal').click(function () {
         closeGameModal();
